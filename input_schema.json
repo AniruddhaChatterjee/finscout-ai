@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "locations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "max_results": {
+      "type": "integer"
+    }
+  },
+  "required": ["keywords"]
+}
