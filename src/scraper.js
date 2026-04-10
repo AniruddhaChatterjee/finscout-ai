@@ -12,7 +12,7 @@ export async function scrapeJobs(input) {
         console.log(`Scraping jobs for: ${keyword}`);
 
         // Call Apify LinkedIn Jobs Scraper
-        const run = await Actor.call("apify/linkedin-jobs-scraper", {
+        const run = await Actor.call("apify/linkedin-jobs", {
             keywords: keyword,
             location: locations[0],
             maxItems: max_results
