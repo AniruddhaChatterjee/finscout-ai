@@ -14,33 +14,22 @@ export async function scrapeJobs(input) {
     for (const keyword of keywords) {
         console.log(`Scraping jobs for: ${keyword}`);
 
-        try {
-            // ✅ Using correct working actor
-            const run = await Actor.call("hKByXkMQaC5Qt9UMN", {
-                query: keyword,
-                location: locations[0],
-                maxJobs: max_results
-            });
+        // 🔹 1. LinkedIn
+        const linkedinJobs = await scrapeLinkedIn(keyword, locations[0], max_results);
 
-            // ✅ Safe extraction
-            const jobs = run?.dataset?.items || [];
+        // 🔹 2. Indeed
+        const indeedJobs = await scrapeIndeed(keyword, locations[0]);
 
-            console.log(`Fetched ${jobs.length} jobs`);
+        // 🔹 3. Naukri
+        const naukriJobs = await scrapeNaukri(keyword);
 
-            // 🔹 Parse jobs into your format
-            const parsedJobs = parseJobs(jobs);
-
-            allJobs.push(...parsedJobs);
-
-        } catch (error) {
-            console.error(`Error scraping for ${keyword}:`, error.message);
-        }
+        allJobs.push(...linkedinJobs, ...indeedJobs, ...naukriJobs);
     }
 
     console.log(`Total jobs scraped: ${allJobs.length}`);
 
-    // 🔹 AI enrichment step
-    const enrichedJobs = await enrichJobs(allJobs);
+    const parsedJobs = parseJobs(allJobs);
+    const enrichedJobs = await enrichJobs(parsedJobs);
 
     return enrichedJobs;
 }
