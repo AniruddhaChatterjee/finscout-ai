@@ -1,0 +1,10 @@
+{
+  "name": "ai-finance-job-scraper",
+  "title": "AI Finance Job Scraper",
+  "description": "Scrapes and enriches finance jobs using AI",
+  "version": "1.0",
+  "buildTag": "latest",
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key"
+  }
+}
