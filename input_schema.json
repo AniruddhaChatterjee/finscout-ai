@@ -1,16 +1,31 @@
 {
+  "title": "Finance Job Scraper Input",
   "type": "object",
+  "schemaVersion": 1,
   "properties": {
     "keywords": {
+      "title": "Job Keywords",
       "type": "array",
-      "items": { "type": "string" }
+      "description": "List of job titles or keywords",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
     },
     "locations": {
+      "title": "Job Locations",
       "type": "array",
-      "items": { "type": "string" }
+      "description": "Locations to search jobs in",
+      "editor": "stringList",
+      "items": {
+        "type": "string"
+      }
     },
     "max_results": {
-      "type": "integer"
+      "title": "Max Results",
+      "type": "integer",
+      "description": "Maximum number of jobs to fetch",
+      "default": 50
     }
   },
   "required": ["keywords"]
